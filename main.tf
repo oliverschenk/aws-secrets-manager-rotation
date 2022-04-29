@@ -122,7 +122,7 @@ resource "aws_security_group_rule" "rds_rotator_egress_rule" {
 }
 
 resource "aws_security_group" "secrets_manager_endpoint_sg" {
-  name        = "${local.id}-vpc-endpoint-sg"
+  name        = "${local.id}-sm-endpoint-sg"
   description = "Secrets Manager VPC endpoint SG"
   vpc_id      = module.vpc.vpc_id
 
