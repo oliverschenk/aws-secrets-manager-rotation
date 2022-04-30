@@ -76,6 +76,34 @@ module "vpc" {
   }
 }
 
+resource "aws_ssm_parameter" "vpc_id" {
+  name        = "/${var.stage}/${var.project_name}/vpc/id"
+  description = "The VPC ID"
+  type        = "String"
+  value       = module.vpc.vpc_id
+}
+
+resource "aws_ssm_parameter" "private_subnet_ids" {
+  name        = "/${var.stage}/${var.project_name}/vpc/subnet/private/ids"
+  description = "The private subnet IDs"
+  type        = "String"
+  value       = join(",", module.vpc.private_subnets)
+}
+
+resource "aws_ssm_parameter" "database_subnet_ids" {
+  name        = "/${var.stage}/${var.project_name}/vpc/subnet/database/ids"
+  description = "The database subnet IDs"
+  type        = "String"
+  value       = join(",", module.vpc.database_subnets)
+}
+
+resource "aws_ssm_parameter" "public_subnet_ids" {
+  name        = "/${var.stage}/${var.project_name}/vpc/subnet/public/ids"
+  description = "The public subnet IDs"
+  type        = "String"
+  value       = join(",", module.vpc.public_subnets)
+}
+
 ###############################################################################
 # Security groups
 ###############################################################################
@@ -97,6 +125,13 @@ resource "aws_security_group" "rds_sg" {
   name        = "${local.id}-rds-sg"
   description = "RDS SG"
   vpc_id      = module.vpc.vpc_id
+}
+
+resource "aws_ssm_parameter" "db_security_group_id" {
+  name        = "/${var.stage}/${var.project_name}/database/security_group_id"
+  description = "The RDS security group ID"
+  type        = "String"
+  value       = aws_security_group.rds_sg.id
 }
 
 resource "aws_security_group_rule" "rds_rotator_lambda_rule" {
