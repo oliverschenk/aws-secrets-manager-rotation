@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "project_name" {
   type        = string
   description = "The name of this project to be used as a prefix for resource names"
-  default     = "aws-secrets-manager-rotation"
+  default     = "my-project"
 }
 
 variable "stage" {
