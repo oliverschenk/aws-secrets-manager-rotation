@@ -8,10 +8,46 @@ Please note that the resources created by this project are NOT free. Deploy at y
 
 - Terraform
 - AWS account with Administrator access
+- aws-vault (only required if using deployment script `deploy.sh`)
 
 ## Getting Started
+
+### Running terraform manually
+
+This method assumes you have credentials set up appropriately.
 
 ```
 terraform init
 terraform apply
+```
+
+### Using the deploy script
+
+This method assumes you have aws-vault configured.
+
+You can configure the default region in the `deploy.sh` file.
+
+
+```
+./deploy.sh
+
+DESCRIPTION:
+  Script for deploying serverless lambda.
+
+USAGE:
+  deploy.sh -p credentials_profile [-r region] [-s stage] [-d destroy]
+
+OPTIONS
+  -p   the credentials profile to use (uses aws-vault)
+  -r   region (default: ap-southeast-2)
+  -s   the stage to deploy [dev, test, prod] (default: dev)
+  -d   destroy
+```
+
+```
+# to apply
+./deploy.sh -p <aws_vault_profile>
+
+# to destroy
+./deploy.sh -p <aws_vault_profile> -d
 ```
