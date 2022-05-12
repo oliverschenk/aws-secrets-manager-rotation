@@ -4,6 +4,8 @@ This repo contains the code for the Medium article [Achieving RDS password rotat
 
 Please note that the resources created by this project are NOT free. Deploy at your own risk and destroy when no longer needed.
 
+If you are interested in how to read secrets from Secrets Manager and perform database migrations see the article [Read Secrets Manager secrets and perform RDS database migrations using Lambda](https://medium.com/@oliver.schenk/read-secrets-manager-secrets-and-perform-rds-database-migrations-using-lambda-7bbea31938b4).
+
 ## Prerequisites
 
 - Terraform
